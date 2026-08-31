@@ -138,8 +138,14 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-6">
-        <Wordmark />
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2 sm:px-6 sm:py-2.5">
+        <Link
+          to="/"
+          aria-label="NIDRA home"
+          className="inline-block transition-opacity hover:opacity-90"
+        >
+          <Wordmark />
+        </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map(([label, href]) => (
             <a

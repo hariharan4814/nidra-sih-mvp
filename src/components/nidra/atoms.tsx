@@ -9,7 +9,10 @@ export function NidraLogo({ className, alt = "NIDRA Logo" }: { className?: strin
     <img
       src={logoImg}
       alt={alt}
-      className={cn("h-8 md:h-9 w-auto object-contain shrink-0", className)}
+      className={cn(
+        "h-12 sm:h-14 md:h-16 w-auto object-contain shrink-0 transition-transform duration-300 hover:scale-105",
+        className,
+      )}
       loading="eager"
     />
   );
@@ -17,8 +20,8 @@ export function NidraLogo({ className, alt = "NIDRA Logo" }: { className?: strin
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-3", className)}>
-      <NidraLogo className="h-8 md:h-9 w-auto max-h-9 object-contain" />
+    <span className={cn("inline-flex items-center gap-3 py-1", className)}>
+      <NidraLogo className="h-12 sm:h-14 md:h-16 w-auto max-h-16 object-contain" />
     </span>
   );
 }
