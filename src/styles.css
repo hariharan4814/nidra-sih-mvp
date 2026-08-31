@@ -259,3 +259,21 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Completely remove any Lovable badge or watermark elements */
+#lovable-badge,
+.lovable-badge,
+[data-lovable-badge],
+[class*="lovable-badge"],
+#lovable-editor-tag,
+div[id*="lovable"],
+a[href*="lovable.dev"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}

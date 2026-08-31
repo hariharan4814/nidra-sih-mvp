@@ -192,10 +192,7 @@ function Hero() {
       <Ambient />
       <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs text-muted-foreground shadow-soft">
-            <Sparkles size={13} className="text-secondary" /> Personalized support for calmer nights
-          </span>
-          <h1 className="mt-7 text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]">
+          <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]">
             <span className="gradient-text">Calm the mind.</span>
             <br />
             <span className="gradient-text">Reclaim your sleep.</span>
