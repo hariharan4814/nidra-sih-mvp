@@ -21,6 +21,7 @@ import { Btn, Card, Reveal, Stars, Wordmark } from "@/components/nidra/atoms";
 import { Ambient } from "@/components/nidra/ambient";
 import { barriers, trendData } from "@/lib/nidra-data";
 import { cn } from "@/lib/utils";
+import heroZenImg from "@/assets/hero-zen.jpg";
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -188,38 +189,56 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden px-5 pb-24 pt-16 sm:px-6 sm:pb-28 sm:pt-24">
+    <section className="relative isolate overflow-hidden px-5 pb-24 pt-16 sm:px-6 sm:pb-32 sm:pt-20">
       <Ambient />
-      <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
-        <Reveal>
-          <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem]">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-12 lg:gap-16">
+        <Reveal className="lg:col-span-6 space-y-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-secondary/10 px-3.5 py-1.5 text-xs font-medium text-secondary">
+            <Sparkles size={13} className="text-teal animate-breathe" /> Non-prescription guided
+            sleep wind-down
+          </div>
+
+          <h1 className="text-[2.6rem] font-bold leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.6rem]">
             <span className="gradient-text">Calm the mind.</span>
             <br />
             <span className="gradient-text">Reclaim your sleep.</span>
           </h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Personalized, trustworthy, non-prescription support for people whose worry and
-            overthinking make it difficult to sleep.
+
+          <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Personalized, trustworthy, non-prescription support for people whose anxiety, worry, and
+            overthinking make it difficult to fall asleep.
           </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Link to="/night" className="sm:w-auto">
-              <Btn size="lg" className="h-14 w-full sm:w-auto">
-                <MoonStar size={18} /> Help Me Sleep
+
+          <div className="flex flex-col gap-3.5 sm:flex-row sm:items-center pt-2">
+            <Link to="/night" className="w-full sm:w-auto">
+              <Btn
+                size="lg"
+                className="h-14 w-full px-8 text-base shadow-glow hover:shadow-lift sm:w-auto"
+              >
+                <MoonStar size={19} /> Help Me Sleep
               </Btn>
             </Link>
-            <a href="#how" className="sm:w-auto">
-              <Btn size="lg" variant="outline" className="h-14 w-full sm:w-auto">
+            <a href="#how" className="w-full sm:w-auto">
+              <Btn size="lg" variant="outline" className="h-14 w-full px-7 text-base sm:w-auto">
                 See How It Works
               </Btn>
             </a>
           </div>
-          <p className="mt-7 flex items-center gap-2 text-xs text-muted-foreground">
-            <ShieldCheck size={14} className="text-teal" /> No diagnosis. No medication. Guided
-            self-management.
-          </p>
+
+          <div className="flex flex-wrap items-center gap-y-2 gap-x-5 pt-3 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <ShieldCheck size={15} className="text-teal" /> No diagnosis
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <ShieldCheck size={15} className="text-teal" /> No medication
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <ShieldCheck size={15} className="text-secondary" /> 100% Guided self-management
+            </span>
+          </div>
         </Reveal>
 
-        <Reveal delay={140}>
+        <Reveal delay={120} className="lg:col-span-6">
           <HeroVisual />
         </Reveal>
       </div>
@@ -228,104 +247,83 @@ function Hero() {
 }
 
 function HeroVisual() {
+  const [breathePhase, setBreathePhase] = useState("Inhale");
+
+  useEffect(() => {
+    const cycle = ["Inhale", "Hold", "Exhale", "Rest"];
+    let i = 0;
+    const interval = setInterval(() => {
+      i = (i + 1) % cycle.length;
+      setBreathePhase(cycle[i] ?? "Inhale");
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative mx-auto w-full max-w-md lg:max-w-lg xl:max-w-xl animate-float">
-      <div className="absolute -inset-8 -z-10 rounded-[3.5rem] bg-secondary/15 blur-3xl" />
-      <div
-        className="relative overflow-hidden rounded-[2.25rem] border border-white/10 p-6 shadow-lift sm:p-8"
-        style={{ backgroundImage: "linear-gradient(160deg, #0F172A, #1E293B 55%, #312E81)" }}
-      >
-        <Stars className="opacity-80" />
-        <svg
-          viewBox="0 0 320 300"
-          className="relative w-full"
-          role="img"
-          aria-label="Abstract night illustration: racing thoughts settling into calm waves around a resting figure"
-        >
-          <defs>
-            <linearGradient id="nx-moon" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#A78BFA" />
-              <stop offset="100%" stopColor="#5EEAD4" />
-            </linearGradient>
-            <linearGradient id="nx-wave" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#5EEAD4" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#A78BFA" stopOpacity="0.45" />
-            </linearGradient>
-            <linearGradient id="nx-body" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#A78BFA" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#5EEAD4" stopOpacity="0.55" />
-            </linearGradient>
-          </defs>
+    <div className="relative mx-auto w-full max-w-lg lg:max-w-xl">
+      {/* Ambient glow backdrop */}
+      <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-tr from-secondary/25 via-primary/20 to-teal/20 blur-3xl opacity-90 animate-breathe" />
 
-          {/* moon */}
-          <g className="animate-breathe" style={{ transformOrigin: "236px 66px" }}>
-            <circle cx="236" cy="66" r="48" fill="url(#nx-moon)" opacity="0.16" />
-            <path d="M250 38a30 30 0 1 0 18 43 24 24 0 0 1-18-43Z" fill="url(#nx-moon)" />
-          </g>
+      {/* Main artwork card */}
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-border/80 bg-card/60 p-3 shadow-lift backdrop-blur-xl">
+        <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] bg-slate-950">
+          <img
+            src={heroZenImg}
+            alt="NIDRA Calm Mind & Peaceful Sleep Cosmic Artwork"
+            className="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
+            loading="eager"
+          />
 
-          {/* clouds */}
-          <ellipse cx="86" cy="52" rx="48" ry="17" fill="#ffffff" opacity="0.07" />
-          <ellipse cx="128" cy="40" rx="30" ry="11" fill="#ffffff" opacity="0.05" />
+          {/* Subtle gradient vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
 
-          {/* racing thought lines that settle to the right */}
-          {[0, 1, 2, 3].map((i) => (
-            <path
-              key={i}
-              d={`M14 ${104 + i * 17} C 60 ${74 + i * 20}, 108 ${132 + i * 12}, 168 ${104 + i * 17} S 250 ${118 + i * 12}, 300 ${112 + i * 14}`}
-              stroke="#A78BFA"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              fill="none"
-              opacity={0.5 - i * 0.09}
-              strokeDasharray="5 11"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="-80"
-                dur={`${20 + i * 6}s`}
-                repeatCount="indefinite"
+          {/* Top Floating Glass Pill */}
+          <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/15 bg-slate-950/70 px-3.5 py-1.5 text-xs font-medium text-white shadow-lift backdrop-blur-md">
+            <span className="h-2 w-2 rounded-full bg-teal animate-ping" />
+            <span className="text-teal font-semibold">NIDRA</span>
+            <span className="text-slate-300">· Night Calm Pacer</span>
+          </div>
+
+          {/* Bottom Floating Glass Card */}
+          <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/15 bg-slate-950/80 p-4 shadow-lift backdrop-blur-lg sm:p-5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#A78BFA]">
+                Active Wind-down
+              </span>
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-teal">
+                <Sparkles size={12} /> {breathePhase}
+              </span>
+            </div>
+
+            <div className="mt-2.5 flex items-center justify-between gap-3 text-sm text-slate-200">
+              <div className="flex flex-col">
+                <span className="text-xs text-slate-400">Before</span>
+                <span className="font-semibold text-rose-300">Racing Thoughts (7/10)</span>
+              </div>
+              <span className="text-teal font-bold">→</span>
+              <div className="flex flex-col text-right">
+                <span className="text-xs text-slate-400">Matched Technique</span>
+                <span className="font-semibold text-teal">Brain Dump (2 min)</span>
+              </div>
+            </div>
+
+            {/* Live rhythm bar */}
+            <div className="mt-3.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-800">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-secondary via-teal to-primary transition-all duration-[2800ms] ease-in-out"
+                style={{
+                  width:
+                    breathePhase === "Inhale"
+                      ? "70%"
+                      : breathePhase === "Hold"
+                        ? "100%"
+                        : breathePhase === "Exhale"
+                          ? "35%"
+                          : "15%",
+                }}
               />
-            </path>
-          ))}
-
-          {/* resting silhouette */}
-          <g opacity="0.95" className="animate-breathe" style={{ transformOrigin: "150px 214px" }}>
-            <circle cx="92" cy="204" r="16" fill="url(#nx-body)" />
-            <path
-              d="M108 220c18-14 38-18 58-13 12 3 20 9 34 9h46"
-              stroke="url(#nx-body)"
-              strokeWidth="14"
-              strokeLinecap="round"
-              fill="none"
-            />
-          </g>
-
-          {/* calm waves */}
-          {[0, 1, 2, 3].map((i) => (
-            <path
-              key={`w-${i}`}
-              d={`M-10 ${248 + i * 15} q 40 -11 80 0 t 80 0 t 80 0 t 80 0`}
-              stroke="url(#nx-wave)"
-              strokeWidth="2"
-              fill="none"
-              opacity={0.45 - i * 0.09}
-            >
-              <animateTransform
-                attributeName="transform"
-                type="translate"
-                values="0 0; 20 0; 0 0"
-                dur={`${18 + i * 4}s`}
-                repeatCount="indefinite"
-              />
-            </path>
-          ))}
-        </svg>
-
-        <div className="relative mt-5 flex items-center justify-between rounded-2xl bg-white/5 px-4 py-3 text-xs text-[#CBD5E1]">
-          <span>Overthinking</span>
-          <span className="text-[#5EEAD4]">→ Calming</span>
-          <span>Rest</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
